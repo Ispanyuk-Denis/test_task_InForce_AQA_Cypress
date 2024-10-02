@@ -6,7 +6,7 @@ This repository contains automated tests written using Cypress. To run the tests
 
 Make sure you have the following components installed:
 
-1. **Node.js** (version 12 or higher)
+1. **Node.js** (version 18 or higher)
 2. **npm** (usually installed along with Node.js)
 
 ## Installing Dependencies
