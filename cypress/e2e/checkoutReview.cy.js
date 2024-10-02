@@ -1,7 +1,5 @@
 /// <reference types="Cypress"/>
 
-import { getNumberFromText } from '../support/commands'
-
 describe('Check Checkout', () => {
     it('Check add items to the Checkout: Overview', () => {
         cy.visit('');
@@ -43,28 +41,18 @@ describe('Check Checkout', () => {
             taxTotal: 0,
             priceTotal: 0,
         };
-        cy.get(':nth-child(3) > .cart_item_label > .item_pricebar > [data-test="inventory-item-price"]')
-            .invoke('text')
-            .then((text) => getNumberFromText(text, configPrice, "totalSum"))
+        cy.getNum(':nth-child(3) > .cart_item_label > .item_pricebar > [data-test="inventory-item-price"]', configPrice, "totalSum")
             .then(() => {
-                cy.get(':nth-child(4) > .cart_item_label > .item_pricebar > [data-test="inventory-item-price"]')
-                    .invoke('text')
-                    .then((text) => getNumberFromText(text, configPrice, "totalSum"));
+                cy.getNum(':nth-child(4) > .cart_item_label > .item_pricebar > [data-test="inventory-item-price"]', configPrice, "totalSum")
             })
             .then(() => {
-                cy.get('[data-test="subtotal-label"]')
-                    .invoke('text')
-                    .then((text) => getNumberFromText(text, configPrice, "priceSubTotal"));
+                cy.getNum('[data-test="subtotal-label"]', configPrice, "priceSubTotal")
             })
             .then(() => {
-                cy.get('[data-test="tax-label"]')
-                    .invoke('text')
-                    .then((text) => getNumberFromText(text, configPrice, "taxTotal"));
+                cy.getNum('[data-test="tax-label"]', configPrice, "taxTotal")
             })
             .then(() => {
-                cy.get('[data-test="total-label"]')
-                    .invoke('text')
-                    .then((text) => getNumberFromText(text, configPrice, "priceTotal"));
+                cy.getNum('[data-test="total-label"]', configPrice, "priceTotal")
             })
             .then(() => {
                 expect(configPrice.totalSum + configPrice.taxTotal).to.equal(configPrice.priceTotal);

@@ -35,9 +35,13 @@ Cypress.Commands.add('addUserInfo', (firstName, lastName, postalCode) => {
     cy.get('[data-test="postalCode"]').type(postalCode);
 })
 
-export function getNumberFromText(text, objConfig, editableKey) {
-    const numbers1 = text.match(/\d+/g);
-    const combinedNumber1 = numbers1.join('.');
-    objConfig[editableKey] += parseFloat(combinedNumber1);
-    return objConfig
-}
+Cypress.Commands.add('getNum', (selector, object, key) => {
+    cy.get(selector)
+        .invoke('text')
+        .then((text) => {
+            const numbers1 = text.match(/\d+/g);
+            const combinedNumber1 = numbers1.join('.');
+            object[key] += parseFloat(combinedNumber1);
+        })
+})
+
